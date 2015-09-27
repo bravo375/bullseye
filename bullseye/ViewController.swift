@@ -15,10 +15,19 @@ class ViewController: UIViewController {
     var currentValue = 0
     var targetValue = 0
     
+    func startNewRound() {
+        targetValue = generateNewTargetValue()
+        currentValue = 50
+        slider.value = Float(currentValue)
+    }
+    
+    func generateNewTargetValue() -> Int {
+        return 1 + Int(arc4random_uniform(100))
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        currentValue = lroundf(slider.value)
-        targetValue = 1 + Int(arc4random_uniform(100))
+        startNewRound()
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,6 +46,8 @@ class ViewController: UIViewController {
         alert.addAction(action)
         
         presentViewController(alert, animated: true, completion: nil)
+        
+        startNewRound()
     }
 
     @IBAction func sliderMoved(slider: UISlider) {
