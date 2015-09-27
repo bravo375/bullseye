@@ -10,11 +10,15 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    var currentValue = 50
+    @IBOutlet weak var slider: UISlider!
+    
+    var currentValue = 0
+    var targetValue = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        currentValue = lroundf(slider.value)
+        targetValue = 1 + Int(arc4random_uniform(100))
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,6 +28,7 @@ class ViewController: UIViewController {
 
     @IBAction func showAlert() {
         let msg = "The value of the slider is: \(currentValue)"
+                + "\n The target value is: \(targetValue)"
         
         let alert = UIAlertController(title: "Current Value", message: msg, preferredStyle: .Alert)
         
